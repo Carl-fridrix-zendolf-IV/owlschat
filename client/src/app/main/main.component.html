@@ -1,0 +1,16 @@
+<div class="page main">
+  <div class="header">
+    <div class="nav">
+        <img src="./assets/icons/ic_arrow_back_black_48px.svg" alt="Back icon" routerLink="/">
+    </div>
+    <div class="tabs-container">
+      <div class="tabs-item" *ngFor="let tab of tabs" [ngClass]="{'selected': tab.selected}" [routerLink]="tab.link" (click)="selectTab(tab)">
+        {{ tab.name }}
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

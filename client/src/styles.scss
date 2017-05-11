@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+
+  font-familly: sans-serif;
+}
+
+*:focus {
+  outline: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+
+  background: #FFC107;
+
+  overflow: hidden;
+}

@@ -1,0 +1,33 @@
+<div class="page login">
+  <h1 class="title">owlschats</h1>
+  <h4 class="sub-title">keep up and meet up with your friends</h4>
+
+  <div class="bottom-login-navi">
+    <div class="form-container" [ngSwitch]="formType">
+
+      <div class="anonymous-input" *ngSwitchCase="'NEW_USER_ANONIM'">
+        <input class="input-field" type="text" placeholder="Anonymous">
+      </div>
+
+      <div class="login-input" *ngSwitchCase="'ALREADY_REGISTERED'">
+        <input class="input-field" type="text" placeholder="Login">
+        <input class="input-field" type="password" placeholder="Password">
+      </div>
+
+      <div class="registrate-input" *ngSwitchCase="'NEW_USER'">
+        <input class="input-field" type="text" placeholder="Login">
+        <input class="input-field" type="text" placeholder="Password">
+        <input class="input-field" type="text" placeholder="Name">
+      </div>
+
+      <button class="submit-button" routerLink="/main/rooms">{{ buttonString }}</button>
+
+    </div>
+
+    <div class="buttons-container">
+      <div class="button-item" (click)="toggleAnotherFormType('login')">Login</div>
+      <div class="button-item" (click)="toggleAnotherFormType('signUp')">Sign up</div>
+    </div>
+  </div>
+</div>
+
