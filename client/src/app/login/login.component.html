@@ -6,27 +6,42 @@
     <div class="form-container" [ngSwitch]="formType">
 
       <div class="anonymous-input" *ngSwitchCase="'NEW_USER_ANONIM'">
-        <input class="input-field" type="text" placeholder="Anonymous">
+        <md-input-container class="width-100">
+          <input mdInput type="text" placeholder="Anonymous">
+        </md-input-container>
       </div>
 
       <div class="login-input" *ngSwitchCase="'ALREADY_REGISTERED'">
-        <input class="input-field" type="text" placeholder="Login">
-        <input class="input-field" type="password" placeholder="Password">
+        <md-input-container class="width-100">
+          <input mdInput type="text" placeholder="Login">
+        </md-input-container>
+
+        <md-input-container class="width-100">
+          <input mdInput type="password" placeholder="Password">
+        </md-input-container>
       </div>
 
       <div class="registrate-input" *ngSwitchCase="'NEW_USER'">
-        <input class="input-field" type="text" placeholder="Login">
-        <input class="input-field" type="text" placeholder="Password">
-        <input class="input-field" type="text" placeholder="Name">
+        <md-input-container class="width-100">
+          <input mdInput type="text" placeholder="Login">
+        </md-input-container>
+
+        <md-input-container class="width-100">
+          <input mdInput type="password" placeholder="Password">
+        </md-input-container>
+
+        <md-input-container class="width-100">
+          <input mdInput type="text" placeholder="Name">
+        </md-input-container>
       </div>
 
-      <button class="submit-button" routerLink="/main/rooms">{{ buttonString }}</button>
+      <button class="width-100" md-raised-button routerLink="/main/rooms">{{ buttonString }}</button>
 
     </div>
 
     <div class="buttons-container">
-      <div class="button-item" (click)="toggleAnotherFormType('login')">Login</div>
-      <div class="button-item" (click)="toggleAnotherFormType('signUp')">Sign up</div>
+      <button md-button class="width-50" (click)="toggleAnotherFormType('login')">Login</button>
+      <button md-button class="width-50" (click)="toggleAnotherFormType('signUp')">Sign up</button>
     </div>
   </div>
 </div>

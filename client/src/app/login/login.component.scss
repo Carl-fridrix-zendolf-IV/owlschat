@@ -40,46 +40,7 @@ $login-color: #03A9F4;
 
     .form-container {
       margin: auto;
-      max-width: 300px;
-
-      .input-field {
-        width: 100%;
-        height: 40px;
-
-        display: block;
-
-        border-radius: $login-border-radius;
-        background: rgba(255,255,255,0.8);
-
-        color: $login-color;
-
-        font-size: 20px;
-
-        margin: 10px auto;
-        padding: 15px;
-
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-      }
-
-      .submit-button {
-        border-radius: $login-border-radius;
-        width: 100%;
-        height: 40px;
-
-        background: #ffffff;
-
-        color: $login-color;
-
-        text-align: center;
-        line-height: 40px;
-
-        font-size: 3vh;
-        font-family: sans-serif;
-
-        margin: auto;
-      }
+      max-width: 350px;
     }
 
     .buttons-container {
@@ -88,7 +49,7 @@ $login-color: #03A9F4;
       justify-content: space-around;
 
       max-width: 300px;
-      margin: auto;
+      margin: 25px auto;
 
       .button-item {
         color: #FAFAFA;
