@@ -33,6 +33,8 @@ export class RoomsComponent {
 
   loadRoomsList () {
     this.loading = true;
+    this.roomsList = null;
+
     this.roomsHttpGetListService.request().subscribe(data => {
       console.log(data);
       this.loading = false;
@@ -48,6 +50,7 @@ export class RoomsComponent {
 
     this.roomsHttpCreateRoomService.request(data).subscribe(() => {
       this.showCreateRoomOverlay = false;
+      this.loadRoomsList();
     }, err => {
       console.error(err)
     });

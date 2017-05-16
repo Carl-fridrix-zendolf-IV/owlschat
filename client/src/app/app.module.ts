@@ -34,6 +34,7 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RoomsComponent } from './main/rooms/rooms.component';
 import { PrivateComponent } from './main/private/private.component';
+import { DetailComponent } from './main/rooms/detail/detail.component';
 
 const appRoutes: Routes = [
   {
@@ -51,9 +52,15 @@ const appRoutes: Routes = [
       {
         path: 'private',
         component: PrivateComponent
+      },
+      {
+        path: 'rooms/:id',
+        component: DetailComponent,
+        pathMatch: 'full'
       }
     ]
-  }
+  },
+  // { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -62,7 +69,8 @@ const appRoutes: Routes = [
     LoginComponent,
     MainComponent,
     RoomsComponent,
-    PrivateComponent
+    PrivateComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +91,13 @@ const appRoutes: Routes = [
     MdChipsModule,
     MdCardModule
   ],
-  providers: [LoginHttpTokenValidateService, LoginHttpAuthService, LoginHttpNewUserService, RoomsHttpGetListService, RoomsHttpCreateRoomService],
+  providers: [
+    LoginHttpTokenValidateService,
+    LoginHttpAuthService,
+    LoginHttpNewUserService,
+    RoomsHttpGetListService,
+    RoomsHttpCreateRoomService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
