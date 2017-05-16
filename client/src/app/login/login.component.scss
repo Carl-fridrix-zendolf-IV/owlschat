@@ -38,9 +38,27 @@ $login-color: #03A9F4;
     margin: auto;
     width: 100%;
 
+    .spinner {
+      width: 50px;
+      margin: auto;
+    }
+
     .form-container {
       margin: auto;
       max-width: 350px;
+
+      .username {
+        color: rgb(245, 245, 245);
+        padding: 15px;
+      }
+
+      input {
+        color: rgb(245, 245, 245);
+      }
+
+      button {
+        margin: 5px 0;
+      }
     }
 
     .buttons-container {

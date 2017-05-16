@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { LoginHttpTokenValidateService } from '../login/login.service';
 import { Tabs } from '../../typings.d';
 
 
@@ -11,8 +12,9 @@ import { Tabs } from '../../typings.d';
 })
 export class MainComponent {
   public tabs: Array<Tabs>;
+  public user: any;
 
-  constructor (private router: Router) {
+  constructor (private router: Router, private loginHttpTokenValidateService: LoginHttpTokenValidateService) {
     const child = location.pathname.split('/').pop();
     this.tabs = [
       {
@@ -28,9 +30,20 @@ export class MainComponent {
     ];
 
     // if user unauthorized return them to login page
-    // if (!AppComponent.TOKEN) {
-    //   this.router.navigate(['']);
-    // }
+    if (!AppComponent.TOKEN) {
+      this.router.navigate(['']);
+    }
+  }
+
+  ngOnInit () {
+    if (!AppComponent.USER) {
+      this.loginHttpTokenValidateService.request().subscribe(data => {
+        AppComponent.USER = data.data;
+        this.user = AppComponent.USER;
+      }, err => {console.log(err)});
+    } else {
+      this.user = AppComponent.USER;
+    }
   }
 
   selectTab (tab: Tabs) :boolean {

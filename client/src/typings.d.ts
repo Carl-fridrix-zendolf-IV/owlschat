@@ -7,7 +7,11 @@ interface NodeModule {
 declare var user: User;
 export interface User {
   name: string;
-  id: number;
+  user_id: number;
+  anonymous: boolean;
+  login: string;
+  registered_at: string;
+  _id: string;
 }
 
 declare var tabs: Tabs;

@@ -4,7 +4,7 @@
   margin: 0;
   border: 0;
 
-  font-familly: sans-serif;
+  font-familly: sans-serif !important;
 }
 
 *:focus {
@@ -15,9 +15,10 @@ html, body {
   width: 100%;
   height: 100%;
 
-  background: #FFC107;
+  background: #3F51B5;
 
   overflow: hidden;
+  font-family: sans-serif !important;
 }
 
 
@@ -28,4 +29,15 @@ html, body {
 
 .width-50 {
   width: 50%;
+}
+
+.error-message {
+  text-align: center;
+  padding: 10px;
+  color: #F44336;
+  font-family: sans-serif;
+}
+
+.text-center {
+  text-align: center !important;
 }

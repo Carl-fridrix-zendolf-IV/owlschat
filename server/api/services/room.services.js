@@ -33,6 +33,8 @@ class RoomServices {
             {
                 $group: {
                     _id: "$_id",
+                    name: {$first: "$name"},
+                    timestamp: {$first: "$timestamp"},
                     online_users: {
                         $push: "$online_users"
                     }

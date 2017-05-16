@@ -5,7 +5,29 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MdInputModule, MdButtonModule, MdListModule } from '@angular/material';
+import {
+  MdInputModule,
+  MdButtonModule,
+  MdListModule,
+  MdToolbarModule,
+  MdTabsModule,
+  MdIconModule,
+  MdProgressBarModule,
+  MdProgressSpinnerModule,
+  MdChipsModule,
+  MdCardModule
+} from '@angular/material';
+
+import {
+  LoginHttpTokenValidateService,
+  LoginHttpAuthService,
+  LoginHttpNewUserService,
+} from './login/login.service';
+
+import {
+  RoomsHttpGetListService,
+  RoomsHttpCreateRoomService
+} from './main/rooms/rooms.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -52,9 +74,16 @@ const appRoutes: Routes = [
     // Angular material imports
     MdInputModule,
     MdButtonModule,
-    MdListModule
+    MdListModule,
+    MdToolbarModule,
+    MdTabsModule,
+    MdIconModule,
+    MdProgressBarModule,
+    MdProgressSpinnerModule,
+    MdChipsModule,
+    MdCardModule
   ],
-  providers: [],
+  providers: [LoginHttpTokenValidateService, LoginHttpAuthService, LoginHttpNewUserService, RoomsHttpGetListService, RoomsHttpCreateRoomService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

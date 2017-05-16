@@ -5,39 +5,52 @@
   <div class="bottom-login-navi">
     <div class="form-container" [ngSwitch]="formType">
 
-      <div class="anonymous-input" *ngSwitchCase="'NEW_USER_ANONIM'">
-        <md-input-container class="width-100">
-          <input mdInput type="text" placeholder="Anonymous">
+      <div *ngSwitchCase="'USER_ANONIM'">
+        <p class="text-center">
+          <small class="username">you authorized as</small>
+        </p>
+        <h2 class="username text-center">
+          {{ username }}
+        </h2>
+      </div>
+
+      <div *ngSwitchCase="'NEW_USER_ANONIM'">
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.name" type="text" placeholder="Anonymous">
         </md-input-container>
       </div>
 
-      <div class="login-input" *ngSwitchCase="'ALREADY_REGISTERED'">
-        <md-input-container class="width-100">
-          <input mdInput type="text" placeholder="Login">
+      <div *ngSwitchCase="'ALREADY_REGISTERED'">
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.login" type="text" placeholder="Login">
         </md-input-container>
 
-        <md-input-container class="width-100">
-          <input mdInput type="password" placeholder="Password">
-        </md-input-container>
-      </div>
-
-      <div class="registrate-input" *ngSwitchCase="'NEW_USER'">
-        <md-input-container class="width-100">
-          <input mdInput type="text" placeholder="Login">
-        </md-input-container>
-
-        <md-input-container class="width-100">
-          <input mdInput type="password" placeholder="Password">
-        </md-input-container>
-
-        <md-input-container class="width-100">
-          <input mdInput type="text" placeholder="Name">
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.password" type="password" placeholder="Password">
         </md-input-container>
       </div>
 
-      <button class="width-100" md-raised-button routerLink="/main/rooms">{{ buttonString }}</button>
+      <div *ngSwitchCase="'NEW_USER'">
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.login" type="text" placeholder="Login">
+        </md-input-container>
 
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.password" type="password" placeholder="Password">
+        </md-input-container>
+
+        <md-input-container color="accent" class="width-100">
+          <input mdInput [(ngModel)]="loginUserObject.name" type="text" placeholder="Name">
+        </md-input-container>
+      </div>
+
+      <button class="width-100" md-raised-button (click)="submit()">{{ buttonString }}</button>
+      <button class="width-100" md-button (click)="cancel();" color="accent">Cancel</button>
+
+      <p class="error-message" *ngIf="error">{{ error }}</p>
     </div>
+
+    <md-progress-spinner *ngIf="showSpinner" class="spinner" mode="indeterminate" color="accent"></md-progress-spinner>
 
     <div class="buttons-container">
       <button md-button class="width-50" (click)="toggleAnotherFormType('login')">Login</button>

@@ -1,14 +1,19 @@
 <div class="page main">
-  <div class="header">
-    <div class="nav">
-        <img src="./assets/icons/ic_arrow_back_black_48px.svg" alt="Back icon" routerLink="/">
+  <md-toolbar color="primary">
+
+    <div>
+      Welcome {{ user?.name }}
     </div>
-    <div class="tabs-container">
-      <div class="tabs-item" *ngFor="let tab of tabs" [ngClass]="{'selected': tab.selected}" [routerLink]="tab.link" (click)="selectTab(tab)">
-        {{ tab.name }}
+
+    <md-toolbar-row class="toolbar">
+      <div class="tabs-container">
+        <div class="tabs-item" *ngFor="let tab of tabs" [ngClass]="{'selected': tab.selected}" [routerLink]="tab.link" (click)="selectTab(tab)">
+          <span color="accent">{{ tab.name }}</span>
+        </div>
       </div>
-    </div>
-  </div>
+    </md-toolbar-row>
+
+  </md-toolbar>
 
   <div class="content">
     <router-outlet></router-outlet>

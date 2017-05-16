@@ -24,7 +24,7 @@ class UserServices {
     }
 
     userValidateToken (req, res) {
-        return systemService.responseGenerator(req, res, true, req.USER_INFO, 20000);
+        systemService.responseGenerator(req, res, true, req.USER_INFO, 20000);
     }
 
     userInit (req, res) {

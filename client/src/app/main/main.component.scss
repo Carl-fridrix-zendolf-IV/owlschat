@@ -1,15 +1,8 @@
 .main {
   //height: 100%;
 
-  .header {
-    height: 100px;
-    width: 100%;
-
+  .toolbar {
     position: relative;
-
-    -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.75);
 
     .tabs-container {
       position: absolute;
@@ -41,15 +34,15 @@
         box-sizing: border-box;
 
         &.selected {
-          border-bottom: 4px solid #FAFAFA;
-          color: #FAFAFA;
+          border-bottom: 4px solid rgb(255, 64, 129);
+          color: rgb(245, 245, 245);
         }
       }
     }
   }
 
   .content {
-    background: #FAFAFA;
+    background: rgb(245, 245, 245);
     height: 100vh;
   }
 }

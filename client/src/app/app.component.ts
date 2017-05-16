@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { User } from '../typings.d';
+import { User } from '../typings';
 
 
 @Component({
@@ -10,10 +10,11 @@ import { User } from '../typings.d';
 export class AppComponent {
   public static USER: User;
   public static TOKEN: string;
+  public static API: string;
 
   constructor () {
-    if (localStorage.getItem('OWLSCHAT_USER')) {
-      AppComponent.USER = JSON.parse(localStorage.getItem('OWLSCHAT_USER'));
+    AppComponent.API = 'http://localhost:3000';
+    if (localStorage.getItem('OWLSCHAT_TOKEN')) {
       AppComponent.TOKEN = localStorage.getItem('OWLSCHAT_TOKEN');
     }
   }

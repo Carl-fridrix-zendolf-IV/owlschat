@@ -1,7 +1,9 @@
-const config = require('../config').CONFIG;
-const express = require('express');
-const bodyParser = require('body-parser')
-const app = express();
+const config = require('../config').CONFIG,
+    express = require('express'),
+    bodyParser = require('body-parser'),
+    cors = require('cors'),
+    app = express();
+
 
 const server = require('http').Server(app);
 const io = require('socket.io')(server, { origins: '*:*'});
@@ -36,6 +38,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use((req, res, next) => {
     let paths = [
@@ -80,7 +84,6 @@ io.on('connection', (socket) => {
     let id = socket.request._query.chat; // socket.io request params, it maybe private chat or room ID
 
     socket.join(id.toString()); // join to socket room
-
 });
 
 exports.io = io; // export socket as global module
