@@ -3,6 +3,9 @@ const SystemService = require('./system.service').SystemServices;
 
 const systemService = new SystemService();
 const Room = mongoose.model('Room');
+const User = mongoose.model('User');
+
+const io = require('../routes');
 
 
 class RoomServices {
@@ -85,18 +88,30 @@ class RoomServices {
                 return systemService.responseGenerator(req, res, false, err.message, 50000);
 
             systemService.responseGenerator(req, res, true, doc, 20000);
+            User.findOne({_id: mongoose.Types.ObjectId(user)}, {name: 1}).exec((err, result) => {
+                if (err)
+                    return;
+
+                io.io.to(room.toString()).emit('USER_JOIN', result);
+            });
         });
     }
 
     removeUserFromRoom (req, res) {
-        const room = mongoose.Types.ObjectId(req.body.room_id);
-        const user = mongoose.Types.ObjectId(req.body.user_id);
+        const room = mongoose.Types.ObjectId(req.query.room_id);
+        const user = mongoose.Types.ObjectId(req.query.user_id);
 
         Room.update({_id: room}, {$pull: {online_list: user}}, (err, doc) => {
             if (err)
                 return systemService.responseGenerator(req, res, false, err.message, 50000);
 
             systemService.responseGenerator(req, res, true, doc, 20000);
+            User.findOne({_id: mongoose.Types.ObjectId(user)}, {name: 1}).exec((err, result) => {
+                if (err)
+                    return;
+
+                io.io.to(room.toString()).emit('USER_LEAVE', result);
+            });
         })
     }
 }

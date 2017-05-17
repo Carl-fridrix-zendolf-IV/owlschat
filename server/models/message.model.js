@@ -5,7 +5,8 @@ const messageSchema = mongoose.Schema({
     message: { type: String, required: true },
     timestamp: { type: Date, default: Date.now() },
     sender_name: String,
-    sender_id: { type: Schema.Types.ObjectId, ref: 'User' },
+    sender_type: Boolean,
+    sender_id: { type: Schema.Types.ObjectId },
     chat_id: { type: Schema.Types.ObjectId }
 });
 

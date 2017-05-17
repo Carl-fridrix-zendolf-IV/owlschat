@@ -15,7 +15,8 @@ import {
   MdProgressBarModule,
   MdProgressSpinnerModule,
   MdChipsModule,
-  MdCardModule
+  MdCardModule,
+  MdSnackBarModule
 } from '@angular/material';
 
 import {
@@ -26,15 +27,25 @@ import {
 
 import {
   RoomsHttpGetListService,
-  RoomsHttpCreateRoomService
+  RoomsHttpCreateRoomService,
+  RoomsHttpJoinToRoomService,
+  RoomsHttpLeaveRoomService
 } from './main/rooms/rooms.service';
+
+import {
+  PrivateHttpGetListService,
+  PrivateHttpSearchUserService,
+  PrivateHttpCreateChatService
+} from './main/private/private.service';
+
+import { DetailHttpCreateMessageService } from './main/detail/detail.service';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { RoomsComponent } from './main/rooms/rooms.component';
 import { PrivateComponent } from './main/private/private.component';
-import { DetailComponent } from './main/rooms/detail/detail.component';
+import { DetailComponent } from './main/detail/detail.component';
 
 const appRoutes: Routes = [
   {
@@ -50,17 +61,22 @@ const appRoutes: Routes = [
         component: RoomsComponent
       },
       {
+        path: 'rooms/:id',
+        component: DetailComponent,
+        pathMatch: 'full'
+      },
+      {
         path: 'private',
         component: PrivateComponent
       },
       {
-        path: 'rooms/:id',
+        path: 'private/:id',
         component: DetailComponent,
         pathMatch: 'full'
       }
     ]
   },
-  // { path: '**', redirectTo: '/', pathMatch: 'full' }
+  { path: '**', redirectTo: '/', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -89,14 +105,21 @@ const appRoutes: Routes = [
     MdProgressBarModule,
     MdProgressSpinnerModule,
     MdChipsModule,
-    MdCardModule
+    MdCardModule,
+    MdSnackBarModule
   ],
   providers: [
     LoginHttpTokenValidateService,
     LoginHttpAuthService,
     LoginHttpNewUserService,
     RoomsHttpGetListService,
-    RoomsHttpCreateRoomService
+    RoomsHttpCreateRoomService,
+    PrivateHttpGetListService,
+    PrivateHttpSearchUserService,
+    PrivateHttpCreateChatService,
+    DetailHttpCreateMessageService,
+    RoomsHttpJoinToRoomService,
+    RoomsHttpLeaveRoomService
   ],
   bootstrap: [AppComponent]
 })

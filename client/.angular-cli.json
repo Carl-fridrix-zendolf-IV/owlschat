@@ -22,7 +22,9 @@
         "styles.scss",
         "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/socket.io-client/dist/socket.io.slim.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

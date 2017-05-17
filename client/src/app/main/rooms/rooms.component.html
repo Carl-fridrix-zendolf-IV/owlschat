@@ -3,7 +3,7 @@
     <md-list-item *ngFor="let room of roomsList">
       <h3 md-line>{{ room.name }}</h3>
       <p md-line>{{ room.timestamp | date:'shortTime' }}</p>
-      <button md-icon-button [routerLink]="room._id">
+      <button md-icon-button [routerLink]="room._id" (click)="joinRoom(room._id)">
         <md-icon svgIcon="arrow-forward"></md-icon>
       </button>
     </md-list-item>

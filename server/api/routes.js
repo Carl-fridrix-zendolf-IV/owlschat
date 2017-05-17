@@ -4,7 +4,6 @@ const config = require('../config').CONFIG,
     cors = require('cors'),
     app = express();
 
-
 const server = require('http').Server(app);
 const io = require('socket.io')(server, { origins: '*:*'});
 
@@ -45,7 +44,8 @@ app.use((req, res, next) => {
     let paths = [
         '/',
         '/api/public/v1/user/auth',
-        '/api/public/v1/user/init'
+        '/api/public/v1/user/init',
+        '/socket.io'
     ];
 
     if (paths.indexOf(req.path) > -1)
@@ -84,10 +84,10 @@ io.on('connection', (socket) => {
     let id = socket.request._query.chat; // socket.io request params, it maybe private chat or room ID
 
     socket.join(id.toString()); // join to socket room
+
+    messageService.getListOfMessages(id.toString());
+
+    // io.to(id.toString()).emit('USERS_LIST_UPDATE', {test: 'Hello world'});
 });
 
 exports.io = io; // export socket as global module
-
-// app.listen(config.port, () => {
-//     console.log(`Express listening on port ${config.port}!`)
-// });

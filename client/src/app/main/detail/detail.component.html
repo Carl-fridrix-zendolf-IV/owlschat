@@ -1,0 +1,23 @@
+<div class="page detail">
+
+  <div class="messages-main" #main>
+    <div class="message-row" *ngFor="let message of messages" [ngClass]="handleMessageSender(message)">
+      <div class="message" *ngIf="message">
+        <p class="message-sender">
+          <span class="message-sender-name">{{ message.sender_name }}</span> <span class="message-sender-time">at {{ message.timestamp | date:'shortTime' }}</span></p>
+        <p class="message-text">
+          {{ message.message }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="input-message-container width-100">
+    <md-input-container color="accent" class="message-input-field">
+      <input mdInput [(ngModel)]="messageModel" (keyup.enter)="createMessage()" type="text" placeholder="Your message">
+    </md-input-container>
+
+    <button md-mini-fab color="accent" [disabled]="!messageModel" (click)="createMessage()">
+      <md-icon svgIcon="send"></md-icon>
+    </button>
+  </div>
+</div>

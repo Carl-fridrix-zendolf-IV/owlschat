@@ -4,6 +4,8 @@ const SystemService = require('./system.service').SystemServices;
 const systemService = new SystemService();
 const Message = mongoose.model('Message');
 
+const io = require('../routes');
+
 
 class MessageService {
     constructor () {}
@@ -12,54 +14,23 @@ class MessageService {
         let message = new Message({
             message: req.body.message,
             sender_name: req.USER_INFO.name,
-            sender_id: mongoose.Types.ObjectId(req.USER_INFO._id),
-            chat_id: req.body.chat_id
+            sender_type: req.USER_INFO.anonymous,
+            sender_id: req.USER_INFO._id,
+            chat_id: mongoose.Types.ObjectId(req.body.chat_id)
         });
 
         message.save((err, result) => {
             if (err)
                 return systemService.responseGenerator(req, res, false, err.message, 50000);
 
-            return systemService.responseGenerator(req, res, true, result, 20000);
+            systemService.responseGenerator(req, res, true, result, 20000);
+            io.io.to(req.body.chat_id.toString()).emit('NEW_MESSAGE', result);
         })
     }
 
     getListOfMessages (chat) {
-        Message.aggregate([
-            // matches
-            {
-                $match: {chat_id: mongoose.Types.ObjectId(chat)}
-            },
-
-            // unwinds
-            {
-                $unwind: "$sender_id"
-            },
-
-            // lookups
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "sender_id",
-                    foreignField: "_id",
-                    as: "sender"
-                }
-            },
-
-            {
-                $unwind: "$sender"
-            },
-
-            {
-                $group: {
-                    _id: "$_id",
-                    sender: {
-                        $first: "$sender"
-                    }
-                }
-            }
-        ]).exec((err, docs) => {
-            console.log(docs);
+        Message.find({chat_id: mongoose.Types.ObjectId(chat)}).exec((err, docs) => {
+            io.io.to(chat).emit('MESSAGES_LIST', docs);
         })
     }
 }

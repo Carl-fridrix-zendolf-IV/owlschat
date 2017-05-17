@@ -25,12 +25,32 @@ class PrivateServices {
     }
 
     listOfPrivateChats (req, res) {
-        Private.find({users: { $in: [req.USER_INFO._id]}}).exec((err, docs) => {
+        Private.aggregate([
+            { $match: {users: { $in: [mongoose.Types.ObjectId(req.USER_INFO._id)]}} },
+            { $unwind: "$users" },
+            { $lookup: { from: 'users', localField: 'users', foreignField: '_id', as: 'users_desc'} },
+            { $unwind: "$users_desc" },
+            { $group: {
+                _id: "$_id",
+                users: { $addToSet: "$users_desc" },
+                timestamp: { $first: "$timestamp" }
+            } }
+        ]).exec((err, docs) => {
             if (err)
                 return systemService.responseGenerator(req, res, false, err.message, 50000);
 
+            for(let item of docs) {
+                item.receiver = item.users.find((element, index, array) => {
+                    if (element._id.toString() === req.USER_INFO._id.toString())
+                        return false;
+                    else
+                        return element
+                })
+            }
+
+
             systemService.responseGenerator(req, res, true, docs, 20000);
-        });
+        })
     }
 }
 

@@ -1,3 +1,67 @@
-<div class="page">
-  <h1>Private page</h1>
+<div class="page search">
+
+  <div class="overlay">
+    <div class="cap">
+      <h2 class="text-center">SOON!</h2>
+      <p class="text-center">Private chats will be here soon...</p>
+    </div>
+  </div>
+
+  <div class="width-100 search-container">
+    <div class="search-item input-field">
+      <md-input-container class="width-100">
+        <input mdInput [(ngModel)]="searchUserModel" type="search" placeholder="Search user by name">
+      </md-input-container>
+    </div>
+    <div class="search-item search-button">
+      <button md-mini-fab color="accent" (click)="searchUser()">
+        <md-icon svgIcon="search"></md-icon>
+      </button>
+    </div>
+  </div>
+
+  <div>
+    <md-list>
+      <h3 md-subheader>Active chats list</h3>
+
+      <!--<md-list-item *ngFor="let chat of chats">-->
+        <!--<h4 md-line>{{ chat.receiver?.name }}</h4>-->
+        <!--<p md-line>{{ chat?.timestamp | date:'shortTime' }}</p>-->
+
+        <!--<button md-icon-button>-->
+          <!--<md-icon svgIcon="arrow-forward"></md-icon>-->
+        <!--</button>-->
+      <!--</md-list-item>-->
+    </md-list>
+  </div>
 </div>
+
+<div class="overlay" *ngIf="showUsersOverlay">
+  <md-card class="users-list-card">
+    <md-card-header>
+      <md-card-title>Users list</md-card-title>
+      <md-card-subtitle>We find this users:</md-card-subtitle>
+    </md-card-header>
+    <md-card-content>
+      <h4 class="text-center" *ngIf="users?.length === 0">Search list is empty</h4>
+
+      <md-list>
+        <md-list-item *ngFor="let user of users">
+          <h4 md-line>
+            {{user.name}}
+            <span *ngIf="user.anonymous">[ANONYMOUS]</span>
+          </h4>
+
+          <button md-icon-button (click)="createPrivateChat(user)">
+            <md-icon svgIcon="arrow-forward"></md-icon>
+          </button>
+        </md-list-item>
+      </md-list>
+    </md-card-content>
+
+    <md-card-actions>
+      <button md-raised-button color="accent" (click)="closeOverlay()">OK</button>
+    </md-card-actions>
+  </md-card>
+</div>
+

@@ -1,0 +1,50 @@
+.search {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .search-container {
+    display: flex;
+    align-items: center;
+
+    .input-field {
+      width: 80%;
+      padding: 10px;
+    }
+
+    .search-button {
+      width: 20%;
+      text-align: center;
+    }
+  }
+}
+
+.overlay {
+  overflow-y: scroll;
+  z-index: 10;
+
+  .cap {
+    margin: 25px auto;
+
+    h2 {
+      color: #ffffff;
+      margin: 20px auto;
+    }
+    p {
+      color: #ffffff;
+      margin: 20px auto;
+    }
+  }
+
+  .users-list-card {
+    max-width: 400px;
+    margin: auto;
+
+    .anonimous {
+      padding: 5px;
+      border: 5px;
+      background: #E0E0E0;
+      color: #212121;
+    }
+  }
+}
