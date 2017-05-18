@@ -15,7 +15,10 @@ class RoomServices {
         Room.aggregate([
             // unwinds
             {
-                $unwind: "$online_list"
+                $unwind: {
+                    path: "$online_list",
+                    preserveNullAndEmptyArrays: true
+                }
             },
 
             // lookups
@@ -29,7 +32,10 @@ class RoomServices {
             },
 
             {
-                $unwind: "$online_users"
+                $unwind: {
+                    path: "$online_users",
+                    preserveNullAndEmptyArrays: true
+                }
             },
 
             // group
@@ -39,7 +45,7 @@ class RoomServices {
                     name: {$first: "$name"},
                     timestamp: {$first: "$timestamp"},
                     online_users: {
-                        $push: "$online_users"
+                        $addToSet: "$online_users"
                     }
                 }
             }

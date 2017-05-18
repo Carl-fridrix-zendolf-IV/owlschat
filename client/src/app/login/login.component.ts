@@ -60,6 +60,9 @@ export class LoginComponent {
     let body = this.loginUserObject;
     body.anonymous = anonim;
 
+    if (body.login)
+      body.login = body.login.toLowerCase();
+
     this.loginHttpNewUserService.request(body).subscribe(data => {
       if (data.code > 20000) {return this.error = data.message;}
 
@@ -76,6 +79,9 @@ export class LoginComponent {
 
   authAlreadyRegistered (): void {
     let body = this.loginUserObject;
+
+    if (body.login)
+      body.login = body.login.toLowerCase();
 
     this.loginHttpAuthService.request(body).subscribe(data => {
       if (data.code > 20000) {return this.error = data.message;}

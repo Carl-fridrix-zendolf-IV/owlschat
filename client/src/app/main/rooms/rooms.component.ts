@@ -11,10 +11,10 @@ import {AppComponent} from "../../app.component";
   styleUrls: ['rooms.component.scss']
 })
 export class RoomsComponent {
-  private showCreateRoomOverlay: boolean;
-  private roomName: string;
-  private loading: boolean;
-  private roomsList: Array<object>;
+  public showCreateRoomOverlay: boolean;
+  public roomName: string;
+  public loading: boolean;
+  public roomsList: Array<object>;
 
   constructor (mdIconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private roomsHttpGetListService: RoomsHttpGetListService, public roomsHttpCreateRoomService: RoomsHttpCreateRoomService, private roomsHttpJoinToRoomService: RoomsHttpJoinToRoomService) {
     mdIconRegistry

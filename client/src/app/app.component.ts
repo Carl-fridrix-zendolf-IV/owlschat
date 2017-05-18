@@ -13,7 +13,9 @@ export class AppComponent {
   public static API: string;
 
   constructor () {
-    AppComponent.API = 'http://localhost:3000';
+    // AppComponent.API = 'http://localhost:3000';
+    AppComponent.API = 'https://owlschat.herokuapp.com';
+
     if (localStorage.getItem('OWLSCHAT_TOKEN')) {
       AppComponent.TOKEN = localStorage.getItem('OWLSCHAT_TOKEN');
     }

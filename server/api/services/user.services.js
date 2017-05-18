@@ -15,6 +15,7 @@ class UserServices {
         }, {__v: 0, password: 0}).exec((err, doc) => {
             if (err)
                 return systemService.responseGenerator(req, res, false, err.message, 50000);
+
             else if (!doc)
                 return systemService.responseGenerator(req, res, false, null, 20002)
 

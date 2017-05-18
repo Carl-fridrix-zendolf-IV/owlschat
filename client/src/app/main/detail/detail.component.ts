@@ -34,9 +34,9 @@ export class DetailComponent {
       return this.router.navigate(['main', 'rooms']);
 
     this.route.params.subscribe((params: Params) => {
-        this.roomId = params.id;
-        this.connectToSocket();
-      });
+      this.roomId = params.id;
+      this.connectToSocket();
+    });
   }
 
   ngOnDestroy () {

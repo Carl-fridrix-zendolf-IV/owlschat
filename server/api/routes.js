@@ -61,7 +61,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    systemServices.responseHandler(req,res,true, null, 20000);
+    systemService.responseGenerator(req,res,true, null, 20000);
 });
 
 app.post('/api/public/v1/user/auth', userServices.userAuth); // this method authorize registered user
@@ -86,8 +86,7 @@ io.on('connection', (socket) => {
     socket.join(id.toString()); // join to socket room
 
     messageService.getListOfMessages(id.toString());
-
-    // io.to(id.toString()).emit('USERS_LIST_UPDATE', {test: 'Hello world'});
 });
 
 exports.io = io; // export socket as global module
+module.exports = app;
